@@ -159,7 +159,7 @@ func MultiplyTooComplex(a, b int) int {
 
 ---
 
-## PGO in Go - Demo
+## PGO in Go - Basic Demo
 
 ```bash
 cd basic
@@ -180,4 +180,11 @@ start=$(date +%s%N)
 end=$(date +%s%N)
 printf "Done! Elapsed time: $(($(($end-$start))/1000000)) ms"
 ```
+
+---
+
+## PGO in Go - Realstic Demo
+
+Go to [distance example](/distance/). It shows an algorithm I wrote for one of
+my personal projects. It's similar to levensthein distance.
 
