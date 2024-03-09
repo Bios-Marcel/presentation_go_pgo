@@ -1,0 +1,4 @@
+*
+!go.mod
+!distance.go
+!.gitignore
