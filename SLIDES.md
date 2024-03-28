@@ -12,7 +12,7 @@ Gophers Hannover, March 2024
   * Includes dependencies and stdlib as well
 * Techniques
   * Inlining
-  * Devirtualization (We'll ignore this for now)
+  * Devirtualization (We'll ignore this)
   * ... I think that's it for now
 * Landed in Go 1.21 (Preview in 1.20)
 
@@ -126,65 +126,7 @@ Script output:
 
 ---
 
-## PGO in Go - The TOTALLY realistic example
+## PGO in Go - Live Demos
 
-```go
-func main() {
-	var sink int
-	for i := range 1000000000 {
-		sink = MultiplyTooComplex(i, i)
-	}
-	_ = sink
-}
-
-func MultiplyInline(a, b int) int {
-	return a * b
-}
-
-func MultiplyTooComplex(a, b int) int {
-	c := a * 1
-	if c >= 1 || c <= 1 || c == 1 || c == 0 || c == b || c == a {
-		c = a
-	} else if c >= 1 || c <= 1 || c == 1 || c == 0 || c == b || c == a {
-		c = a
-	} else {
-		if c >= 1 || c <= 1 || c == 1 || c == 0 || c == b || c == a {
-			c = a
-		}
-	}
-
-	return 1 * (c * b)
-}
-```
-
----
-
-## PGO in Go - Basic Demo
-
-```bash
-cd basic
-
-# Show inline hints
-go build -gcflags="-m -m" . 2>&1
-
-# Measure and generate CPU profile
-start=$(date +%s%N)
-./basic
-end=$(date +%s%N)
-printf "Done! Elapsed time: $(($(($end-$start))/1000000)) ms\n\n"
-
-# Build with Optimisations an profile
-go build -pgo=cpu.pprof -gcflags="-m -m" -o basic_pgo . 2>&1
-start=$(date +%s%N)
-./basic_pgo
-end=$(date +%s%N)
-printf "Done! Elapsed time: $(($(($end-$start))/1000000)) ms"
-```
-
----
-
-## PGO in Go - Realstic Demo
-
-Go to [distance example](/distance/). It shows an algorithm I wrote for one of
-my personal projects. It's similar to levensthein distance.
+TO THE TERMINAL!
 
